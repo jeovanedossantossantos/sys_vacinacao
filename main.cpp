@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "func.c"
 using namespace std;
 
 int main()
