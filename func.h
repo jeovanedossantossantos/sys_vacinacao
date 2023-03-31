@@ -3,4 +3,6 @@
 
    //Aqui vai os protótipos e as declarações das strucs 
 
+   int menu();
+
 #endif
