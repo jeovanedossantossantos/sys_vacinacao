@@ -1,19 +1,23 @@
-
+#include <iostream>
 #include "func.cpp"
 using namespace std;
 
-int main(void)
+int main()
 {
 
   int opcao;
+  int quantidadePacientes = 0;
+
   do
   {
+
     opcao = menu();
 
     switch (opcao)
     {
     case 1:
-      cout << opcao;
+      Cadastra(quantidadePacientes);
+
       break;
     case 2:
       cout << opcao;
