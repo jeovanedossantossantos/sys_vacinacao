@@ -2,20 +2,22 @@
 #include "func.cpp"
 using namespace std;
 
-int main(){
-	
-  int opcao = 1;
-  int quantidadePacientes=0;
-  
-  do{
+int main()
+{
 
-    
-    
-	switch (opcao)
+  int opcao;
+  int quantidadePacientes = 0;
+
+  do
+  {
+
+    opcao = menu();
+
+    switch (opcao)
     {
     case 1:
       Cadastra(quantidadePacientes);
-     
+
       break;
     case 2:
       cout << opcao;
@@ -35,8 +37,8 @@ int main(){
     default:
       cout << opcao;
     }
-    
-  }while(opcao !=0);
 
-    return 0;
+  } while (opcao != 0);
+
+  return 0;
 }
