@@ -15,5 +15,6 @@ typedef struct
 
 int menu();
 void Cadastra(int &quantidadePacientes);
+void SalvarDados(int &quantidadePacientes);
 
 #endif
