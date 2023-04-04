@@ -41,13 +41,13 @@ void Cadastra(int &quantidadePacientes)
 		getchar();
 		cout << "Digite o nome do paciente\n";
 		gets(pacientes[quantidadePacientes].nome);
-//		while (cin.getline(pacientes[quantidadePacientes].nome,100))
-//		{ // Garante que o nome sera preenchido
-//			if (pacientes[quantidadePacientes].nome != "")
-//			{
-//				break;
-//			}
-//		}
+		//		while (cin.getline(pacientes[quantidadePacientes].nome,100))
+		//		{ // Garante que o nome sera preenchido
+		//			if (pacientes[quantidadePacientes].nome != "")
+		//			{
+		//				break;
+		//			}
+		//		}
 
 		cout << "Digite a idade do paciente\n";
 		cin >> pacientes[quantidadePacientes].idade;
@@ -92,8 +92,7 @@ void SalvarDados(int &quantidadePacientes)
 		cout << "\nErro ao abrir o arquivo para leitura!\n";
 		exit(1);
 	}
-
-	fwrite(&pacientes[quantidadePacientes], sizeof(Paciente), 1, arq);
+	fwrite(pacientes, sizeof(Paciente), quantidadePacientes + 1, arq);
 	fclose(arq);
 	quantidadePacientes++;
 	fwrite(&quantidadePacientes, sizeof(int), 1, qtd);
@@ -112,18 +111,21 @@ void CarregarDados(int &quantidadePacientes)
 		exit(1); // aborta o programa
 	}
 	fread(&quantidadePacientes, sizeof(int), 1, qtd);
-	cout << quantidadePacientes;
+
 	// o la�o vai repetir ate chegara a 10 porque n�o se sabe o tamanho do vetor por isso ira pegar 1 de cada vez
+	// Complexibilidade n
 	for (int i = 0; i < quantidadePacientes; i++)
 	{
 		fread(&pacientes[i], sizeof(Paciente), 1, arq);
 	}
 	fclose(arq); // fecha o arquivo
 	fclose(qtd);
-	for (int i = 0; i < quantidadePacientes; i++)
-	{
-		cout << "Nome: " << pacientes[0].nome << "\n";
-		cout << "Idade: " << pacientes[0].idade << "\n";
-		cout << "Indentificador: " << pacientes[0].indentificado << "\n";
-	}
+	// cout << "Carregando " << quantidadePacientes << "\n";
+	// for (int i = 0; i < quantidadePacientes; i++)
+	// {
+	// 	cout << i << "Mostrando i\n";
+	// 	cout << "Nome: " << pacientes[i].nome << "\n";
+	// 	cout << "Idade: " << pacientes[i].idade << "\n";
+	// 	cout << "Indentificador: " << pacientes[i].indentificado << "\n";
+	// }
 }
