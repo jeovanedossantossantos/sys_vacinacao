@@ -8,12 +8,14 @@
 using namespace std;
 typedef struct
 {
-	string nome;
+	char nome[100];
 	int idade;
 	int indentificado;
 } Paciente;
 
 int menu();
 void Cadastra(int &quantidadePacientes);
+void SalvarDados(int &quantidadePacientes);
+void CarregarDados(int &quantidadePacientes);
 
 #endif

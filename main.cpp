@@ -10,7 +10,7 @@ int main()
 
   do
   {
-
+    CarregarDados(quantidadePacientes);
     opcao = menu();
 
     switch (opcao)
@@ -20,7 +20,7 @@ int main()
 
       break;
     case 2:
-      cout << opcao;
+
       break;
     case 3:
       cout << opcao;
