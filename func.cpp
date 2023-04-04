@@ -6,6 +6,7 @@ using namespace std;
 
 int menu()
 {
+
 	int opcao;
 	cout << "================================================================\n";
 	cout << "       SYSTEMA DE CADASTRO PARA A VACINACAO DO COVID19\n";
@@ -37,14 +38,16 @@ void Cadastra(int &quantidadePacientes)
 	}
 	else
 	{
+		getchar();
 		cout << "Digite o nome do paciente\n";
-		while (getline(cin, pacientes[quantidadePacientes].nome))
-		{ // Garante que o nome sera preenchido
-			if (pacientes[quantidadePacientes].nome != "")
-			{
-				break;
-			}
-		}
+		gets(pacientes[quantidadePacientes].nome);
+//		while (cin.getline(pacientes[quantidadePacientes].nome,100))
+//		{ // Garante que o nome sera preenchido
+//			if (pacientes[quantidadePacientes].nome != "")
+//			{
+//				break;
+//			}
+//		}
 
 		cout << "Digite a idade do paciente\n";
 		cin >> pacientes[quantidadePacientes].idade;
@@ -73,24 +76,54 @@ void Cadastra(int &quantidadePacientes)
 		cout << "Nome: " << pacientes[quantidadePacientes].nome << "\n";
 		cout << "Idade: " << pacientes[quantidadePacientes].idade << "\n";
 		cout << "Indentificador: " << pacientes[quantidadePacientes].indentificado << "\n";
-		quantidadePacientes++;
+
 		SalvarDados(quantidadePacientes);
 	}
 }
 
 void SalvarDados(int &quantidadePacientes)
 {
-	int i, qtd = 0;
-	FILE *arq;
+	FILE *arq, *qtd;
 
 	arq = fopen("dados.bin", "wb"); // abre o arquivo para escrita
-
-	if (arq == NULL)
+	qtd = fopen("qtd.bin", "wb");
+	if (arq == NULL || qtd == NULL)
 	{
 		cout << "\nErro ao abrir o arquivo para leitura!\n";
 		exit(1);
 	}
 
-	fwrite(pacientes, sizeof(Paciente), quantidadePacientes, arq);
+	fwrite(&pacientes[quantidadePacientes], sizeof(Paciente), 1, arq);
 	fclose(arq);
+	quantidadePacientes++;
+	fwrite(&quantidadePacientes, sizeof(int), 1, qtd);
+	fclose(qtd);
+}
+
+void CarregarDados(int &quantidadePacientes)
+{ // funcao que lera o arquivo texto
+
+	FILE *arq = fopen("dados.bin", "rb"); // abre o arquivo para leitura
+	FILE *qtd = fopen("qtd.bin", "rb");
+	if (arq == NULL || qtd == NULL)
+	{
+		cout << "\nErro ao abrir o arquivo para leitura!\n";
+
+		exit(1); // aborta o programa
+	}
+	fread(&quantidadePacientes, sizeof(int), 1, qtd);
+	cout << quantidadePacientes;
+	// o la�o vai repetir ate chegara a 10 porque n�o se sabe o tamanho do vetor por isso ira pegar 1 de cada vez
+	for (int i = 0; i < quantidadePacientes; i++)
+	{
+		fread(&pacientes[i], sizeof(Paciente), 1, arq);
+	}
+	fclose(arq); // fecha o arquivo
+	fclose(qtd);
+	for (int i = 0; i < quantidadePacientes; i++)
+	{
+		cout << "Nome: " << pacientes[0].nome << "\n";
+		cout << "Idade: " << pacientes[0].idade << "\n";
+		cout << "Indentificador: " << pacientes[0].indentificado << "\n";
+	}
 }
