@@ -20,7 +20,7 @@ int main()
 
       break;
     case 2:
-
+      ListarPorIdadeDeFormaCrecente(quantidadePacientes);
       break;
     case 3:
       cout << opcao;

@@ -26,3 +26,44 @@ identificador.
 - O algoritmo de pesquisa deve ser escolhido entre os que já foram vistos em sala de aula.
 - Deverá ser feita a análise de complexidade dos algoritmos utilizados.
 - Equipe com até 5 pessoas.
+
+
+
+```
+
+// Paciente left[meio], right[fim - meio];
+	// int topLeft = 0, topRight = 0;
+	// for (int i = 0; i < meio; i++)
+	// {
+	// 	left[i] = pacientes[i];
+	// }
+	// for (int i = meio; i < fim; i++)
+	// {
+	// 	right[i - meio] = pacientes[i];
+	// 	cout << right[i - meio].nome;
+	// }
+	// for (int k = inicio; k < fim; k++)
+	// {
+	// 	if (topLeft >= meio)
+	// 	{
+	// 		pacientes[k] = right[topRight];
+	// 		topRight++;
+	// 	}
+	// 	else if (topRight >= (fim - meio))
+	// 	{
+	// 		pacientes[k] = left[topLeft];
+	// 		topLeft++;
+	// 	}
+	// 	else if (left[topLeft].idade < right[topRight].idade)
+	// 	{
+	// 		pacientes[k] = left[topLeft];
+	// 		topLeft++;
+	// 	}
+	// 	else
+	// 	{
+	// 		pacientes[k] = right[topRight];
+	// 		topRight++;
+	// 	}
+	// }
+
+```
