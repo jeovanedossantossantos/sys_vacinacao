@@ -17,13 +17,12 @@ int main()
     {
     case 1:
       Cadastra(quantidadePacientes);
-
       break;
     case 2:
-      ListarPorIdadeDeFormaCrecente(quantidadePacientes);
+      ListarPorIdade(quantidadePacientes, 2);
       break;
     case 3:
-      cout << opcao;
+      ListarPorIdade(quantidadePacientes, 3);
       break;
     case 4:
       cout << opcao;
