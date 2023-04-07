@@ -4,6 +4,10 @@
 #include <string>
 #include <cstring>
 #include <fstream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <vector>
 
 using namespace std;
 typedef struct
@@ -17,5 +21,8 @@ int menu();
 void Cadastra(int &quantidadePacientes);
 void SalvarDados(int &quantidadePacientes);
 void CarregarDados(int &quantidadePacientes);
+void ListarPorIdadeDeFormaCrecente(int &quantidadePacientes);
+void MergeSort(Paciente pacientes[], int inicio, int fim);
+void Merge(Paciente pacientes[], int inicio, int meio, int fim);
 
 #endif

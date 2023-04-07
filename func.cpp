@@ -23,6 +23,7 @@ int menu()
 	cout << "================================================================\n";
 
 	cin >> opcao;
+	system("cls");
 
 	return opcao;
 }
@@ -41,13 +42,6 @@ void Cadastra(int &quantidadePacientes)
 		getchar();
 		cout << "Digite o nome do paciente\n";
 		gets(pacientes[quantidadePacientes].nome);
-		//		while (cin.getline(pacientes[quantidadePacientes].nome,100))
-		//		{ // Garante que o nome sera preenchido
-		//			if (pacientes[quantidadePacientes].nome != "")
-		//			{
-		//				break;
-		//			}
-		//		}
 
 		cout << "Digite a idade do paciente\n";
 		cin >> pacientes[quantidadePacientes].idade;
@@ -100,7 +94,7 @@ void SalvarDados(int &quantidadePacientes)
 }
 
 void CarregarDados(int &quantidadePacientes)
-{ // funcao que lera o arquivo texto
+{ // funcao que ler o arquivo texto
 
 	FILE *arq = fopen("dados.bin", "rb"); // abre o arquivo para leitura
 	FILE *qtd = fopen("qtd.bin", "rb");
@@ -112,7 +106,6 @@ void CarregarDados(int &quantidadePacientes)
 	}
 	fread(&quantidadePacientes, sizeof(int), 1, qtd);
 
-	// o la�o vai repetir ate chegara a 10 porque n�o se sabe o tamanho do vetor por isso ira pegar 1 de cada vez
 	// Complexibilidade n
 	for (int i = 0; i < quantidadePacientes; i++)
 	{
@@ -120,12 +113,78 @@ void CarregarDados(int &quantidadePacientes)
 	}
 	fclose(arq); // fecha o arquivo
 	fclose(qtd);
-	// cout << "Carregando " << quantidadePacientes << "\n";
-	// for (int i = 0; i < quantidadePacientes; i++)
-	// {
-	// 	cout << i << "Mostrando i\n";
-	// 	cout << "Nome: " << pacientes[i].nome << "\n";
-	// 	cout << "Idade: " << pacientes[i].idade << "\n";
-	// 	cout << "Indentificador: " << pacientes[i].indentificado << "\n";
-	// }
+}
+void ListarPorIdadeDeFormaCrecente(int &quantidadePacientes)
+{
+
+	cout << "================================================================\n";
+	cout << "Listando por idade de forma crecente \n";
+	cout << "================================================================\n";
+	MergeSort(pacientes, 0, quantidadePacientes - 1);
+	for (int i = 0; i < quantidadePacientes; i++)
+	{
+		cout << "Nome: ------------- " << pacientes[i].nome << "\n";
+		cout << "Idade: ------------ " << pacientes[i].idade << "\n";
+		cout << "Indentificador: --- " << pacientes[i].indentificado << "\n";
+		cout << "================================================================\n";
+	}
+
+	cout << "================================================================\n";
+	system("pause");
+	system("cls");
+}
+void MergeSort(Paciente pacientes[], int inicio, int fim)
+{
+	int meio;
+
+	if (inicio < fim)
+	{
+
+		meio = (fim + inicio) / 2;
+
+		MergeSort(pacientes, inicio, meio);
+		MergeSort(pacientes, meio + 1, fim);
+		Merge(pacientes, inicio, meio, fim);
+	}
+}
+
+void Merge(Paciente pacientes[], int inicio, int meio, int fim)
+{
+
+	int i = inicio, j = meio + 1, k = 0;
+	int juncao = fim - inicio + 1;
+	Paciente temp[fim - inicio + 1];
+
+	while (i <= meio && j <= fim)
+	{
+		if (pacientes[i].idade < pacientes[j].idade)
+		{
+			temp[k] = pacientes[i];
+			i++;
+		}
+		else
+		{
+			temp[k] = pacientes[j];
+			j++;
+		}
+		k++;
+	}
+	while (i <= meio)
+	{
+		temp[k] = pacientes[i];
+		i++;
+		k++;
+	}
+
+	while (j <= fim)
+	{
+		temp[k] = pacientes[j];
+		j++;
+		k++;
+	}
+
+	for (k = 0; k < juncao; k++)
+	{
+		pacientes[inicio + k] = temp[k];
+	}
 }
