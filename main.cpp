@@ -32,7 +32,7 @@ int main()
       cout << opcao;
       break;
     case 6:
-      cout << opcao;
+      BuscaPorNome(quantidadePacientes);
       break;
     default:
       cout << opcao;

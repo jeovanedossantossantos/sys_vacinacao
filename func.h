@@ -13,9 +13,17 @@ typedef struct
 	int indentificado;
 } Paciente;
 
+struct No {
+    Paciente paciente;
+    No* esquerda;
+    No* direita;
+};
+
 int menu();
 void Cadastra(int &quantidadePacientes);
 void SalvarDados(int &quantidadePacientes);
 void CarregarDados(int &quantidadePacientes);
+void BuscaPorNome(int &quantidadePacientes);
+
 
 #endif

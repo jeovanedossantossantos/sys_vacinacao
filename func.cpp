@@ -1,8 +1,41 @@
 
+#include <string>
 #include "func.h"
 
 Paciente pacientes[10];
 using namespace std;
+
+
+No* raiz = NULL;
+
+
+
+No* Insere(No* raiz, Paciente paciente)
+{
+    // se a �rvore est� vazia, cria um novo n�
+    if (raiz == NULL)
+    {
+        No* novoNo = new No;
+        novoNo->paciente = paciente;
+        novoNo->esquerda = NULL;
+        novoNo->direita = NULL;
+        return novoNo;
+    }
+
+    // se o nome do paciente � menor que o nome da raiz, insere na sub�rvore esquerda
+    if (string(paciente.nome) < string(raiz->paciente.nome))
+    {
+        raiz->esquerda = Insere(raiz->esquerda, paciente);
+    }
+    // se o nome do paciente � maior que o nome da raiz, insere na sub�rvore direita
+    else if (string(paciente.nome) > string(raiz->paciente.nome))
+    {
+        raiz->direita = Insere(raiz->direita, paciente);
+    }
+
+    // retorna a raiz da �rvore atualizada
+    return raiz;
+}
 
 int menu()
 {
@@ -129,3 +162,53 @@ void CarregarDados(int &quantidadePacientes)
 	// 	cout << "Indentificador: " << pacientes[i].indentificado << "\n";
 	// }
 }
+
+
+// fun��o para buscar pacientes pelo nome usando �rvore de busca bin�ria
+void BuscaPorNome(int &quantidadePacientes)
+{
+    char nomeBusca[100];
+	int i=0;
+	getchar();
+    cout << "Digite o nome do paciente: ";
+    gets(nomeBusca);
+	// getchar();
+	// 	cout << "Digite o nome do paciente\n";
+	// 	gets(pacientes[quantidadePacientes].nome);
+	
+
+    No* atual = raiz;
+	// cout << atual;
+	
+    while (i<quantidadePacientes)
+    {
+		// strcpy(destino, origem);
+        if (strstr(pacientes[i].nome,nomeBusca))
+        {
+            // Paciente paciente = pacientes;
+            cout << "Nome: " << pacientes[i].nome << "\n";
+            return;
+        }
+        else if (strlen(pacientes[i].nome) > strlen(nomeBusca))
+        {
+            atual = atual->esquerda;
+        }
+        else
+        {
+            atual = atual->direita;
+        }
+
+		// if(i<quantidadePacientes){
+		// 	break;
+		// }
+		i++;
+    }
+
+    // se n�o encontrou
+    cout << "Paciente nao encontrado.\n";
+}
+
+
+
+
+
