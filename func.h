@@ -17,5 +17,7 @@ int menu();
 void Cadastra(int &quantidadePacientes);
 void SalvarDados(int &quantidadePacientes);
 void CarregarDados(int &quantidadePacientes);
+void merge(Paciente v[], int a, int b, int c);
+void merge_sort(Paciente v[], int a, int c, int n);
 
 #endif
