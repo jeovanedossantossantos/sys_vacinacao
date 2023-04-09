@@ -19,10 +19,10 @@ int main()
       Cadastra(quantidadePacientes);
       break;
     case 2:
-      ListarPorIdade(quantidadePacientes, 2);
+      Listar(quantidadePacientes, 2);
       break;
     case 3:
-      ListarPorIdade(quantidadePacientes, 3);
+      Listar(quantidadePacientes, 3);
       break;
     case 4:
       cout << opcao;
@@ -32,6 +32,12 @@ int main()
       break;
     case 6:
       cout << opcao;
+      break;
+    case 7:
+      cout << opcao;
+      break;
+    case 8:
+      Listar(quantidadePacientes, 8);
       break;
     default:
       cout << opcao;

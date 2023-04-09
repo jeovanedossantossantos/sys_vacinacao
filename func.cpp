@@ -18,6 +18,7 @@ int menu()
 	cout << "[5] - LISTAR: ORDENAR PELO INDENTIFICADOR DECRECENTE\n";
 	cout << "[6] - BUSCAR PELO NOME\n";
 	cout << "[7] - BUSCAR POR INDENTIFICADO\n";
+	cout << "[8] - LISTAR: ORDENAR POR ORDEM ALFABETICA\n";
 	cout << "[0] - SAIR DO SYSTEMA\n";
 
 	cout << "================================================================\n";
@@ -119,7 +120,7 @@ void CarregarDados(int &quantidadePacientes)
 	fclose(qtd);
 }
 
-void ListarPorIdade(int &quantidadePacientes, int tipo)
+void Listar(int &quantidadePacientes, int tipo)
 {
 
 	cout << "================================================================\n";
@@ -133,6 +134,11 @@ void ListarPorIdade(int &quantidadePacientes, int tipo)
 	{
 		QuickSort(pacientes, 0, quantidadePacientes - 1);
 		cout << "       Listando por idade de forma Decrecente \n";
+	}
+	else if (tipo == 8)
+	{
+		QuickSortNome(pacientes, 0, quantidadePacientes - 1);
+		cout << "       Listando por ordem alfabetica \n";
 	}
 
 	cout << "================================================================\n";
@@ -235,5 +241,36 @@ int Patition(Paciente pacientes[], int inicio, int fim)
 	paciente = pacientes[fim];
 	pacientes[fim] = pacientes[i];
 	pacientes[i] = paciente;
+	return i;
+}
+
+void QuickSortNome(Paciente pacientes[], int inicio, int fim)
+{
+	int p;
+
+	if (inicio < fim)
+	{
+		p = PatitionNome(pacientes, inicio, fim);
+		QuickSortNome(pacientes, inicio, p - 1);
+		QuickSortNome(pacientes, p + 1, fim);
+	}
+}
+int PatitionNome(Paciente pacientes[], int inicio, int fim)
+{
+
+	char *pivot = pacientes[fim].nome;
+	int i = inicio;
+	Paciente paciente;
+
+	for (int j = inicio; j < fim; j++)
+	{
+		if (strcmp(pacientes[j].nome, pivot) < 0)
+		{
+			swap(pacientes[j], pacientes[i]);
+			i++;
+		}
+	}
+	swap(pacientes[fim], pacientes[i]);
+
 	return i;
 }
