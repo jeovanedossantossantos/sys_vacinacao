@@ -7,9 +7,7 @@ int main()
 
   int opcao;
   int quantidadePacientes = 0;
-  int a = 0;
-  int c = 0;
-  int n = 0;
+  
 
 
   do
@@ -21,22 +19,27 @@ int main()
     {
     case 1:
       Cadastra(quantidadePacientes);
-
       break;
     case 2:
-
+      Listar(quantidadePacientes, 2);
       break;
     case 3:
-      cout << opcao;
+      Listar(quantidadePacientes, 3);
       break;
     case 4:
       cout << opcao;
       break;
     case 5:
-      merge_sort(v[qtd], a, c, n);
+     Listar(quantidadePacientes, 5);
       break;
     case 6:
       cout << opcao;
+      break;
+    case 7:
+      cout << opcao;
+      break;
+    case 8:
+      Listar(quantidadePacientes, 8);
       break;
     default:
       cout << opcao;

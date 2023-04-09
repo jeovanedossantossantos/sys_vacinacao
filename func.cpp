@@ -18,11 +18,13 @@ int menu()
 	cout << "[5] - LISTAR: ORDENAR PELO INDENTIFICADOR DECRECENTE\n";
 	cout << "[6] - BUSCAR PELO NOME\n";
 	cout << "[7] - BUSCAR POR INDENTIFICADO\n";
+	cout << "[8] - LISTAR: ORDENAR POR ORDEM ALFABETICA\n";
 	cout << "[0] - SAIR DO SYSTEMA\n";
 
 	cout << "================================================================\n";
 
 	cin >> opcao;
+	system("cls");
 
 	return opcao;
 }
@@ -41,14 +43,7 @@ void Cadastra(int &quantidadePacientes)
 		getchar();
 		cout << "Digite o nome do paciente\n";
 		gets(pacientes[quantidadePacientes].nome);
-		//		while (cin.getline(pacientes[quantidadePacientes].nome,100))
-		//		{ // Garante que o nome sera preenchido
-		//			if (pacientes[quantidadePacientes].nome != "")
-		//			{
-		//				break;
-		//			}
-		//		}
-
+		strcpy(pacientes[quantidadePacientes].nome,strupr(pacientes[quantidadePacientes].nome));
 		cout << "Digite a idade do paciente\n";
 		cin >> pacientes[quantidadePacientes].idade;
 
@@ -72,12 +67,16 @@ void Cadastra(int &quantidadePacientes)
 			}
 
 		} while (unique != 0);
+		cout << "================================================================\n";
 		cout << "Paciente, cadastrado com sucesso\n";
-		cout << "Nome: " << pacientes[quantidadePacientes].nome << "\n";
-		cout << "Idade: " << pacientes[quantidadePacientes].idade << "\n";
-		cout << "Indentificador: " << pacientes[quantidadePacientes].indentificado << "\n";
+		cout << "Nome: ------------" << pacientes[quantidadePacientes].nome << "\n";
+		cout << "Idade: -----------" << pacientes[quantidadePacientes].idade << "\n";
+		cout << "Indentificador: --" << pacientes[quantidadePacientes].indentificado << "\n";
+		cout << "================================================================\n";
 
 		SalvarDados(quantidadePacientes);
+		system("pause");
+		system("cls");
 	}
 }
 
@@ -100,7 +99,7 @@ void SalvarDados(int &quantidadePacientes)
 }
 
 void CarregarDados(int &quantidadePacientes)
-{ // funcao que lera o arquivo texto
+{ // funcao que ler o arquivo texto
 
 	FILE *arq = fopen("dados.bin", "rb"); // abre o arquivo para leitura
 	FILE *qtd = fopen("qtd.bin", "rb");
@@ -112,7 +111,6 @@ void CarregarDados(int &quantidadePacientes)
 	}
 	fread(&quantidadePacientes, sizeof(int), 1, qtd);
 
-	// o la�o vai repetir ate chegara a 10 porque n�o se sabe o tamanho do vetor por isso ira pegar 1 de cada vez
 	// Complexibilidade n
 	for (int i = 0; i < quantidadePacientes; i++)
 	{
@@ -120,18 +118,169 @@ void CarregarDados(int &quantidadePacientes)
 	}
 	fclose(arq); // fecha o arquivo
 	fclose(qtd);
-	// cout << "Carregando " << quantidadePacientes << "\n";
-	// for (int i = 0; i < quantidadePacientes; i++)
-	// {
-	// 	cout << i << "Mostrando i\n";
-	// 	cout << "Nome: " << pacientes[i].nome << "\n";
-	// 	cout << "Idade: " << pacientes[i].idade << "\n";
-	// 	cout << "Indentificador: " << pacientes[i].indentificado << "\n";
-	// }
+}
+
+void Listar(int &quantidadePacientes, int tipo)
+{
+
+	cout << "================================================================\n";
+	if (tipo == 2)
+	{
+		cout << "Listando por idade de forma crecente \n";
+
+		MergeSort(pacientes, 0, quantidadePacientes - 1);
+	}
+	else if (tipo == 3)
+	{
+		QuickSort(pacientes, 0, quantidadePacientes - 1);
+		cout << "       Listando por idade de forma Decrecente \n";
+	}
+	else if(tipo==5){
+		cout << "       Listando por Indentificador de forma Decrecente \n";
+		MergeSortIndendificado(pacientes, 0, quantidadePacientes-1,quantidadePacientes);
+	}
+	else if (tipo == 8)
+	{
+		QuickSortNome(pacientes, 0, quantidadePacientes - 1);
+		cout << "       Listando por ordem alfabetica \n";
+	}
+
+	cout << "================================================================\n";
+	for (int i = 0; i < quantidadePacientes; i++)
+	{
+		cout << "Nome: ------------- " << pacientes[i].nome << "\n";
+		cout << "Idade: ------------ " << pacientes[i].idade << "\n";
+		cout << "Indentificador: --- " << pacientes[i].indentificado << "\n";
+		cout << "================================================================\n";
+	}
+
+	cout << "================================================================\n";
+	system("pause");
+	system("cls");
+}
+
+void MergeSort(Paciente pacientes[], int inicio, int fim)
+{
+	int meio;
+
+	if (inicio < fim)
+	{
+
+		meio = (fim + inicio) / 2;
+
+		MergeSort(pacientes, inicio, meio);
+		MergeSort(pacientes, meio + 1, fim);
+		Merge(pacientes, inicio, meio, fim);
+	}
+}
+void Merge(Paciente pacientes[], int inicio, int meio, int fim)
+{
+
+	int i = inicio, j = meio + 1, k = 0;
+	int juncao = fim - inicio + 1;
+	Paciente temp[fim - inicio + 1];
+
+	while (i <= meio && j <= fim)
+	{
+		if (pacientes[i].idade < pacientes[j].idade)
+		{
+			temp[k] = pacientes[i];
+			i++;
+		}
+		else
+		{
+			temp[k] = pacientes[j];
+			j++;
+		}
+		k++;
+	}
+	while (i <= meio)
+	{
+		temp[k] = pacientes[i];
+		i++;
+		k++;
+	}
+
+	while (j <= fim)
+	{
+		temp[k] = pacientes[j];
+		j++;
+		k++;
+	}
+
+	for (k = 0; k < juncao; k++)
+	{
+		pacientes[inicio + k] = temp[k];
+	}
+}
+
+void QuickSort(Paciente pacientes[], int inicio, int fim)
+{
+	int p;
+
+	if (inicio < fim)
+	{
+		p = Patition(pacientes, inicio, fim);
+		QuickSort(pacientes, inicio, p - 1);
+		QuickSort(pacientes, p + 1, fim);
+	}
+}
+int Patition(Paciente pacientes[], int inicio, int fim)
+{
+
+	int pivot = pacientes[fim].idade;
+	int i = inicio;
+	Paciente paciente;
+
+	for (int j = inicio; j < fim; j++)
+	{
+		if (pacientes[j].idade >= pivot)
+		{
+			paciente = pacientes[j];
+			pacientes[j] = pacientes[i];
+			pacientes[i] = paciente;
+			i++;
+		}
+	}
+	paciente = pacientes[fim];
+	pacientes[fim] = pacientes[i];
+	pacientes[i] = paciente;
+	return i;
+}
+
+void QuickSortNome(Paciente pacientes[], int inicio, int fim)
+{
+	int p;
+
+	if (inicio < fim)
+	{
+		p = PatitionNome(pacientes, inicio, fim);
+		QuickSortNome(pacientes, inicio, p - 1);
+		QuickSortNome(pacientes, p + 1, fim);
+	}
+}
+int PatitionNome(Paciente pacientes[], int inicio, int fim)
+{
+
+	char *pivot = pacientes[fim].nome;
+	int i = inicio;
+	Paciente paciente;
+
+	for (int j = inicio; j < fim; j++)
+	{
+		if (strcmp(pacientes[j].nome, pivot) < 0)
+		{
+			swap(pacientes[j], pacientes[i]);
+			i++;
+		}
+	}
+	swap(pacientes[fim], pacientes[i]);
+
+	return i;
 }
 
 // Função para fazer a fusão de duas sub-arrays ordenadas em um único array
-void merge(Paciente v[], int a, int b, int c) {
+void MergeIndentificador(Paciente v[], int a, int b, int c) {
     int x, y, z;
     int num_1 = b - a + 1;
     int num_2 = c - b;
@@ -179,29 +328,29 @@ void merge(Paciente v[], int a, int b, int c) {
 }
 
 // Função para dividir o array em sub-arrays menores e chamar a função merge para fazer a fusão
-void merge_sort(Paciente v[], int a, int c, int n) {
+void MergeSortIndendificado(Paciente v[], int a, int c, int n) {
     if (a < c) {
         int b = a + (c - a) / 2;
 
         // Chama a função merge_sort para a sub-array esquerda
-        merge_sort(v, a, b, n);
+        MergeSortIndendificado(v, a, b, n);
 
         // Chama a função merge_sort para a sub-array direita
-        merge_sort(v, b + 1, c, n);
+        MergeSortIndendificado(v, b + 1, c, n);
 
         // Faz a fusão das sub-arrays esquerda e direita
-        merge(v, a, b, c);
+       MergeIndentificador(v, a, b, c);
     }
 }
 
 
-void merge_imprimir(int &quantidadePacientes){
-	// Chama a função merge_sort para ordenar o array de idades em ordem decrescente
-    merge_sort(pacientes[], 0, quantidadePacientes - 1, quantidadePacientes);
+// void merge_imprimir(int &quantidadePacientes){
+// 	// Chama a função merge_sort para ordenar o array de idades em ordem decrescente
+//     merge_sort(pacientes[], 0, quantidadePacientes - 1, quantidadePacientes);
 
-    // Imprime o array ordenado em ordem decrescente
+//     // Imprime o array ordenado em ordem decrescente
 
-    for (int i = 0; i < quantidadePacientes; i++) {
-        cout << pacientes[i] << " ";
-    }
-}
+//     for (int i = 0; i < quantidadePacientes; i++) {
+//         cout << pacientes[i] << " ";
+//     }
+// }
