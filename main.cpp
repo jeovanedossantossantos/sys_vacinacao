@@ -7,6 +7,10 @@ int main()
 
   int opcao;
   int quantidadePacientes = 0;
+  int a = 0;
+  int c = 0;
+  int n = 0;
+
 
   do
   {
@@ -29,7 +33,7 @@ int main()
       cout << opcao;
       break;
     case 5:
-      cout << opcao;
+      merge_sort(v[qtd], a, c, n);
       break;
     case 6:
       cout << opcao;

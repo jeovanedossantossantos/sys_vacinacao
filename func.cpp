@@ -193,3 +193,15 @@ void merge_sort(Paciente v[], int a, int c, int n) {
         merge(v, a, b, c);
     }
 }
+
+
+void merge_imprimir(int &quantidadePacientes){
+	// Chama a função merge_sort para ordenar o array de idades em ordem decrescente
+    merge_sort(pacientes[], 0, quantidadePacientes - 1, quantidadePacientes);
+
+    // Imprime o array ordenado em ordem decrescente
+
+    for (int i = 0; i < quantidadePacientes; i++) {
+        cout << pacientes[i] << " ";
+    }
+}
