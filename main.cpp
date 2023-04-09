@@ -7,6 +7,8 @@ int main()
 
   int opcao;
   int quantidadePacientes = 0;
+  
+
 
   do
   {
@@ -28,7 +30,7 @@ int main()
       cout << opcao;
       break;
     case 5:
-      cout << opcao;
+     Listar(quantidadePacientes, 5);
       break;
     case 6:
       cout << opcao;

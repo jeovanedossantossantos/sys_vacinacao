@@ -43,7 +43,7 @@ void Cadastra(int &quantidadePacientes)
 		getchar();
 		cout << "Digite o nome do paciente\n";
 		gets(pacientes[quantidadePacientes].nome);
-
+		strcpy(pacientes[quantidadePacientes].nome,strupr(pacientes[quantidadePacientes].nome));
 		cout << "Digite a idade do paciente\n";
 		cin >> pacientes[quantidadePacientes].idade;
 
@@ -134,6 +134,10 @@ void Listar(int &quantidadePacientes, int tipo)
 	{
 		QuickSort(pacientes, 0, quantidadePacientes - 1);
 		cout << "       Listando por idade de forma Decrecente \n";
+	}
+	else if(tipo==5){
+		cout << "       Listando por Indentificador de forma Decrecente \n";
+		MergeSortIndendificado(pacientes, 0, quantidadePacientes-1,quantidadePacientes);
 	}
 	else if (tipo == 8)
 	{
@@ -274,3 +278,79 @@ int PatitionNome(Paciente pacientes[], int inicio, int fim)
 
 	return i;
 }
+
+// Função para fazer a fusão de duas sub-arrays ordenadas em um único array
+void MergeIndentificador(Paciente v[], int a, int b, int c) {
+    int x, y, z;
+    int num_1 = b - a + 1;
+    int num_2 = c - b;
+
+    // Criação de arrays temporários A e R
+    Paciente A[num_1], R[num_2];
+
+    // Copia os elementos das duas sub-arrays para os arrays temporários A e R
+    for (x = 0; x < num_1; x++)
+        A[x] = v[a + x];
+    for (y = 0; y < num_2; y++)
+        R[y] = v[b + 1 + y];
+
+    // Inicialização dos índices x, y e z para fazer a fusão
+    x = 0; // Índice para a sub-array A
+    y = 0; // Índice para a sub-array R
+    z = a; // Índice para o array original z
+
+    // Faz a fusão das duas sub-arrays em um único array em ordem decrescente
+    while (x < num_1 && y < num_2) {
+        if (A[x].indentificado >= R[y].indentificado) { // Compara o elemento da sub-array A com o elemento da sub-array R
+            v[z] = A[x]; // O elemento da sub-array A é maior ou igual ao elemento da sub-array R
+            x++; // Incrementa o índice da sub-array A
+        }
+        else {
+            v[z] = R[y]; // O elemento da sub-array R é maior do que o elemento da sub-array A
+            y++; // Incrementa o índice da sub-array R
+        }
+        z++; // Incrementa o índice do array original arr
+    }
+
+    // Copia os elementos restantes da sub-array A, se houver
+    while (x < num_1) {
+        v[z] = A[x];
+        x++;
+        z++;
+    }
+
+    // Copia os elementos restantes da sub-array R, se houver
+    while (y < num_2) {
+        v[z] = R[y];
+        y++;
+        z++;
+    }
+}
+
+// Função para dividir o array em sub-arrays menores e chamar a função merge para fazer a fusão
+void MergeSortIndendificado(Paciente v[], int a, int c, int n) {
+    if (a < c) {
+        int b = a + (c - a) / 2;
+
+        // Chama a função merge_sort para a sub-array esquerda
+        MergeSortIndendificado(v, a, b, n);
+
+        // Chama a função merge_sort para a sub-array direita
+        MergeSortIndendificado(v, b + 1, c, n);
+
+        // Faz a fusão das sub-arrays esquerda e direita
+       MergeIndentificador(v, a, b, c);
+    }
+}
+
+
+// void merge_imprimir(int &quantidadePacientes){
+// 	// Chama a função merge_sort para ordenar o array de idades em ordem decrescente
+//     merge_sort(pacientes[], 0, quantidadePacientes - 1, quantidadePacientes);
+
+//     // Imprime o array ordenado em ordem decrescente
+
+//     for (int i = 0; i < quantidadePacientes; i++) {
+//         cout << pacientes[i] << " ";
+//     }
+// }
