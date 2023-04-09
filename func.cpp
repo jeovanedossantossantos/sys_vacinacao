@@ -66,12 +66,16 @@ void Cadastra(int &quantidadePacientes)
 			}
 
 		} while (unique != 0);
+		cout << "================================================================\n";
 		cout << "Paciente, cadastrado com sucesso\n";
-		cout << "Nome: " << pacientes[quantidadePacientes].nome << "\n";
-		cout << "Idade: " << pacientes[quantidadePacientes].idade << "\n";
-		cout << "Indentificador: " << pacientes[quantidadePacientes].indentificado << "\n";
+		cout << "Nome: ------------" << pacientes[quantidadePacientes].nome << "\n";
+		cout << "Idade: -----------" << pacientes[quantidadePacientes].idade << "\n";
+		cout << "Indentificador: --" << pacientes[quantidadePacientes].indentificado << "\n";
+		cout << "================================================================\n";
 
 		SalvarDados(quantidadePacientes);
+		system("pause");
+		system("cls");
 	}
 }
 
@@ -114,13 +118,24 @@ void CarregarDados(int &quantidadePacientes)
 	fclose(arq); // fecha o arquivo
 	fclose(qtd);
 }
-void ListarPorIdadeDeFormaCrecente(int &quantidadePacientes)
+
+void ListarPorIdade(int &quantidadePacientes, int tipo)
 {
 
 	cout << "================================================================\n";
-	cout << "Listando por idade de forma crecente \n";
+	if (tipo == 2)
+	{
+		cout << "Listando por idade de forma crecente \n";
+
+		MergeSort(pacientes, 0, quantidadePacientes - 1);
+	}
+	else if (tipo == 3)
+	{
+		QuickSort(pacientes, 0, quantidadePacientes - 1);
+		cout << "       Listando por idade de forma Decrecente \n";
+	}
+
 	cout << "================================================================\n";
-	MergeSort(pacientes, 0, quantidadePacientes - 1);
 	for (int i = 0; i < quantidadePacientes; i++)
 	{
 		cout << "Nome: ------------- " << pacientes[i].nome << "\n";
@@ -133,6 +148,7 @@ void ListarPorIdadeDeFormaCrecente(int &quantidadePacientes)
 	system("pause");
 	system("cls");
 }
+
 void MergeSort(Paciente pacientes[], int inicio, int fim)
 {
 	int meio;
@@ -147,7 +163,6 @@ void MergeSort(Paciente pacientes[], int inicio, int fim)
 		Merge(pacientes, inicio, meio, fim);
 	}
 }
-
 void Merge(Paciente pacientes[], int inicio, int meio, int fim)
 {
 
@@ -187,4 +202,38 @@ void Merge(Paciente pacientes[], int inicio, int meio, int fim)
 	{
 		pacientes[inicio + k] = temp[k];
 	}
+}
+
+void QuickSort(Paciente pacientes[], int inicio, int fim)
+{
+	int p;
+
+	if (inicio < fim)
+	{
+		p = Patition(pacientes, inicio, fim);
+		QuickSort(pacientes, inicio, p - 1);
+		QuickSort(pacientes, p + 1, fim);
+	}
+}
+int Patition(Paciente pacientes[], int inicio, int fim)
+{
+
+	int pivot = pacientes[fim].idade;
+	int i = inicio;
+	Paciente paciente;
+
+	for (int j = inicio; j < fim; j++)
+	{
+		if (pacientes[j].idade >= pivot)
+		{
+			paciente = pacientes[j];
+			pacientes[j] = pacientes[i];
+			pacientes[i] = paciente;
+			i++;
+		}
+	}
+	paciente = pacientes[fim];
+	pacientes[fim] = pacientes[i];
+	pacientes[i] = paciente;
+	return i;
 }

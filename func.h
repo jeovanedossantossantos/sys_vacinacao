@@ -21,8 +21,10 @@ int menu();
 void Cadastra(int &quantidadePacientes);
 void SalvarDados(int &quantidadePacientes);
 void CarregarDados(int &quantidadePacientes);
-void ListarPorIdadeDeFormaCrecente(int &quantidadePacientes);
+void ListarPorIdade(int &quantidadePacientes, int tipo);
 void MergeSort(Paciente pacientes[], int inicio, int fim);
 void Merge(Paciente pacientes[], int inicio, int meio, int fim);
+void QuickSort(Paciente pacientes[], int inicio, int fim);
+int Patition(Paciente pacientes[], int inicio, int fim);
 
 #endif
