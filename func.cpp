@@ -354,3 +354,50 @@ void MergeSortIndendificado(Paciente v[], int a, int c, int n) {
 //         cout << pacientes[i] << " ";
 //     }
 // }
+
+
+
+void listarQuickCrescente(Paciente lista[], int tam) {
+    // Ordenando a lista pelo identificador em ordem crescente
+    // Complexidade de listar = complexidaade do quicksort = O(n log(n))
+    quicksortCrescente(lista, 0, tam - 1);
+
+    // Imprimindo a lista ordenada
+    cout << "Lista de pacientes ordenada pelo identificador:" << endl;
+    for (int i = 0; i < tam; i++) {
+        cout << "Nome: " << lista[i].nome << endl;
+        cout << "Idade: " << lista[i].idade << endl;
+        cout << "Identificador: " << lista[i].indentificado << endl;
+        cout << endl;
+    }
+}
+
+
+void quicksortCrescente(Paciente lista[], int esq, int dir) {
+	// A complexidade de ordenação quicksort é O(n log n) no caso médio e O(n^2) no pior caso. 
+    if (esq < dir) {
+        // Escolhendo o último elemento como pivô
+        int pivo = lista[dir].indentificado ;
+        int i = esq - 1;
+
+        // Particionando a lista em sub-listas menores
+        for (int j = esq; j < dir; j++) {
+            if (lista[j].indentificado <= pivo) {
+                i++;
+                Paciente temp = lista[i];
+                lista[i] = lista[j];
+                lista[j] = temp;
+            }
+        }
+
+        // Colocando o pivô em sua posição final
+        Paciente temp = lista[i + 1];
+        lista[i + 1] = lista[dir];
+        lista[dir] = temp;
+
+        // Chamando a função quicksort recursivamente para ordenar as sub-listas
+        quicksortCrescente(lista, esq, i);
+        quicksortCrescente(lista, i + 2, dir);
+    }
+}
+ 

@@ -27,7 +27,7 @@ int main()
       Listar(quantidadePacientes, 3);
       break;
     case 4:
-      cout << opcao;
+      listarQuickCrescente(pacientes, quantidadePacientes);
       break;
     case 5:
      Listar(quantidadePacientes, 5);
