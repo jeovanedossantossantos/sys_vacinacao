@@ -27,7 +27,7 @@ int main()
       Listar(quantidadePacientes, 3);
       break;
     case 4:
-      listarQuickCrescente(pacientes, quantidadePacientes);
+      Listar(quantidadePacientes, 4);
       break;
     case 5:
      Listar(quantidadePacientes, 5);
