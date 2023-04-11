@@ -29,6 +29,8 @@ int Patition(Paciente pacientes[], int inicio, int fim);
 void QuickSortNome(Paciente pacientes[], int inicio, int fim);
 int PatitionNome(Paciente pacientes[], int inicio, int fim);
 
+void quicksortCrescente(Paciente lista[], int inicio, int fim);
+
 void MergeIndentificador(Paciente v[], int a, int b, int c);
 void MergeSortIndendificado(Paciente v[], int a, int c, int n);
 

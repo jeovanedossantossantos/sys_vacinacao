@@ -135,6 +135,11 @@ void Listar(int &quantidadePacientes, int tipo)
 		QuickSort(pacientes, 0, quantidadePacientes - 1);
 		cout << "       Listando por idade de forma Decrecente \n";
 	}
+	else if (tipo == 4)
+	{
+		quicksortCrescente(pacientes, 0, quantidadePacientes - 1);
+		cout << "       Listando por identificador de forma Crescente \n";
+	}
 	else if(tipo==5){
 		cout << "       Listando por Indentificador de forma Decrecente \n";
 		MergeSortIndendificado(pacientes, 0, quantidadePacientes-1,quantidadePacientes);
@@ -354,3 +359,34 @@ void MergeSortIndendificado(Paciente v[], int a, int c, int n) {
 //         cout << pacientes[i] << " ";
 //     }
 // }
+
+
+
+void quicksortCrescente(Paciente lista[], int inicio, int fim) {
+	// A complexidade de ordenação quicksort é O(n log n) no caso médio e O(n^2) no pior caso. 
+    if (inicio < fim) {
+        // Escolhendo o último elemento como pivô
+        int pivo = lista[fim].indentificado ;
+        int i = inicio - 1;
+
+        // Particionando a lista em sub-listas menores
+        for (int j = inicio; j < fim; j++) {
+            if (lista[j].indentificado <= pivo) {
+                i++;
+                Paciente temp = lista[i];
+                lista[i] = lista[j];
+                lista[j] = temp;
+            }
+        }
+
+        // Colocando o pivô em sua posição final
+        Paciente temp = lista[i + 1];
+        lista[i + 1] = lista[fim];
+        lista[fim] = temp;
+
+        // Chamando a função quicksort recursivamente para ordenar as sub-listas
+        quicksortCrescente(lista, inicio, i);
+        quicksortCrescente(lista, i + 2, fim);
+    }
+}
+ 
