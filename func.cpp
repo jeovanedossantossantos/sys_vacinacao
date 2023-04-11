@@ -1,41 +1,9 @@
-
+#include <iostream>
 #include <string>
 #include "func.h"
 
 Paciente pacientes[10];
 using namespace std;
-
-
-No* raiz = NULL;
-
-
-
-No* Insere(No* raiz, Paciente paciente)
-{
-    // se a �rvore est� vazia, cria um novo n�
-    if (raiz == NULL)
-    {
-        No* novoNo = new No;
-        novoNo->paciente = paciente;
-        novoNo->esquerda = NULL;
-        novoNo->direita = NULL;
-        return novoNo;
-    }
-
-    // se o nome do paciente � menor que o nome da raiz, insere na sub�rvore esquerda
-    if (string(paciente.nome) < string(raiz->paciente.nome))
-    {
-        raiz->esquerda = Insere(raiz->esquerda, paciente);
-    }
-    // se o nome do paciente � maior que o nome da raiz, insere na sub�rvore direita
-    else if (string(paciente.nome) > string(raiz->paciente.nome))
-    {
-        raiz->direita = Insere(raiz->direita, paciente);
-    }
-
-    // retorna a raiz da �rvore atualizada
-    return raiz;
-}
 
 int menu()
 {
@@ -164,51 +132,49 @@ void CarregarDados(int &quantidadePacientes)
 }
 
 
-// fun��o para buscar pacientes pelo nome usando �rvore de busca bin�ria
-void BuscaPorNome(int &quantidadePacientes)
+void BuscarPeloNome(int &quantidadePacientes)
 {
-    char nomeBusca[100];
-	int i=0;
-	getchar();
-    cout << "Digite o nome do paciente: ";
-    gets(nomeBusca);
-	// getchar();
-	// 	cout << "Digite o nome do paciente\n";
-	// 	gets(pacientes[quantidadePacientes].nome);
-	
+    string nomeBuscado;
 
-    No* atual = raiz;
-	// cout << atual;
-	
-    while (i<quantidadePacientes)
+    cout << "Digite o nome que deseja buscar: ";
+    getchar();
+    getline(cin, nomeBuscado);
+
+    // Ordena o vetor de pacientes pelo nome
+    sort(pacientes, pacientes + quantidadePacientes, [](Paciente p1, Paciente p2) {
+        return p1.nome < p2.nome;
+    });
+
+    int inicio = 0, fim = quantidadePacientes - 1, meio;
+    bool encontrado = false;
+
+    while (inicio <= fim && !encontrado)
     {
-		// strcpy(destino, origem);
-        if (strstr(pacientes[i].nome,nomeBusca))
+        meio = (inicio + fim) / 2;
+
+        if (nomeBuscado == pacientes[meio].nome)
         {
-            // Paciente paciente = pacientes;
-            cout << "Nome: " << pacientes[i].nome << "\n";
-            return;
+            cout << "Paciente encontrado:\n";
+            cout << "Nome: " << pacientes[meio].nome << "\n";
+            cout << "Idade: " << pacientes[meio].idade << "\n";
+            cout << "Indentificador: " << pacientes[meio].indentificado << "\n";
+            encontrado = true;
         }
-        else if (strlen(pacientes[i].nome) > strlen(nomeBusca))
+        else if (nomeBuscado < pacientes[meio].nome)
         {
-            atual = atual->esquerda;
+            fim = meio - 1;
         }
         else
         {
-            atual = atual->direita;
+            inicio = meio + 1;
         }
-
-		// if(i<quantidadePacientes){
-		// 	break;
-		// }
-		i++;
     }
 
-    // se n�o encontrou
-    cout << "Paciente nao encontrado.\n";
+    if (!encontrado)
+    {
+        cout << "Paciente nao encontrado.\n";
+    }
 }
-
-
 
 
 

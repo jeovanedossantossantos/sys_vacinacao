@@ -1,4 +1,4 @@
-#include <iostream>
+#include <algorithm>
 #include "func.cpp"
 using namespace std;
 
@@ -7,6 +7,7 @@ int main()
 
   int opcao;
   int quantidadePacientes = 0;
+
 
   do
   {
@@ -17,7 +18,6 @@ int main()
     {
     case 1:
       Cadastra(quantidadePacientes);
-
       break;
     case 2:
 
@@ -32,7 +32,7 @@ int main()
       cout << opcao;
       break;
     case 6:
-      BuscaPorNome(quantidadePacientes);
+       BuscarPeloNome(quantidadePacientes);
       break;
     default:
       cout << opcao;
