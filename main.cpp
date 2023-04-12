@@ -1,4 +1,4 @@
-#include <iostream>
+#include <algorithm>
 #include "func.cpp"
 using namespace std;
 
@@ -7,8 +7,6 @@ int main()
 
   int opcao;
   int quantidadePacientes = 0;
-  
-
 
   do
   {
@@ -30,10 +28,11 @@ int main()
       Listar(quantidadePacientes, 4);
       break;
     case 5:
-     Listar(quantidadePacientes, 5);
+      Listar(quantidadePacientes, 5);
       break;
     case 6:
-      cout << opcao;
+      Listar(quantidadePacientes, 6);
+
       break;
     case 7:
       cout << opcao;
