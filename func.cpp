@@ -345,6 +345,8 @@ int PatitionNome(Paciente pacientes[], int inicio, int fim)
 	return i;
 }
 
+//A complexibilidade do algoritmo MergeSort O(n log n), n = números de elementos a serem ordenados
+//A complexibilidade de espaço dessa função é O(n), n = tamanhos de subvetores a serem mesclados
 // Função para fazer a fusão de duas sub-arrays ordenadas em um único array
 void MergeIndentificador(Paciente v[], int a, int b, int c)
 {
