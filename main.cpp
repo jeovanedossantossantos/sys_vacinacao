@@ -8,7 +8,6 @@ int main()
   int opcao;
   int quantidadePacientes = 0;
 
-
   do
   {
     CarregarDados(quantidadePacientes);
@@ -20,19 +19,26 @@ int main()
       Cadastra(quantidadePacientes);
       break;
     case 2:
-
+      Listar(quantidadePacientes, 2);
       break;
     case 3:
-      cout << opcao;
+      Listar(quantidadePacientes, 3);
       break;
     case 4:
-      cout << opcao;
+      Listar(quantidadePacientes, 4);
       break;
     case 5:
-      cout << opcao;
+      Listar(quantidadePacientes, 5);
       break;
     case 6:
-       BuscarPeloNome(quantidadePacientes);
+      Listar(quantidadePacientes, 6);
+
+      break;
+    case 7:
+      cout << opcao;
+      break;
+    case 8:
+      Listar(quantidadePacientes, 8);
       break;
     default:
       cout << opcao;
