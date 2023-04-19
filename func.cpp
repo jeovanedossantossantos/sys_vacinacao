@@ -12,12 +12,12 @@ int menu()
 	cout << "       SYSTEMA DE CADASTRO PARA A VACINACAO DO COVID19\n";
 	cout << "================================================================\n";
 	cout << "[1] - CADASTRA UM NOVO PACIENTE\n";
-	cout << "[2] - LISTAR: ORDENAR PELA IDADE DE FORMA CRECENTE\n";
-	cout << "[3] - LISTAR: ORDENAR PELA IDADE DEFORMA DECRECENTE\n";
-	cout << "[4] - LISTAR: ORDENAR PELO INDENTIFICADOR DE FORMA CRECENTE\n";
-	cout << "[5] - LISTAR: ORDENAR PELO INDENTIFICADOR DECRECENTE\n";
+	cout << "[2] - LISTAR: ORDENAR PELA IDADE DE FORMA CRESCENTE\n";
+	cout << "[3] - LISTAR: ORDENAR PELA IDADE DE FORMA DECRESCENTE\n";
+	cout << "[4] - LISTAR: ORDENAR PELO INDENTIFICADOR DE FORMA CRESCENTE\n";
+	cout << "[5] - LISTAR: ORDENAR PELO INDENTIFICADOR DE FORMA DECRESCENTE\n";
 	cout << "[6] - BUSCAR PELO NOME\n";
-	cout << "[7] - BUSCAR POR INDENTIFICADO\n";
+	cout << "[7] - BUSCAR POR INDENTIFICADOR\n";
 	cout << "[0] - SAIR DO SYSTEMA\n";
 
 	cout << "================================================================\n";
@@ -129,3 +129,34 @@ void CarregarDados(int &quantidadePacientes)
 	// 	cout << "Indentificador: " << pacientes[i].indentificado << "\n";
 	// }
 }
+
+int buscaIndentificador(float v[], int n)
+{
+	string nome;
+	int ini = 0, fim = n - 1, meio;
+	while
+		{
+			cout << "Digite o numero de identificacao do paciente\n";
+			cin >> pacientes[quantidadePacientes].indentificado;
+            meio = (ini+fim)/2
+			if (quantidadePacientes == v[meio]) return meio
+            if (quantidadePacientes < v[meio]) return fim = meio-1
+			if (quantidadePacientes > v[meio]) return ini = meio+1
+		}
+				unique = 0;
+				for (int i = 0; i < quantidadePacientes; i++)
+				{
+					if (pacientes[quantidadePacientes].indentificado == pacientes[i].indentificado)
+					{
+						unique = 1;
+						cout << "Indetificador invalido, tente outro\n";
+						break;
+					}
+				}
+			}
+
+		} while (unique != 0);
+	cout << "Paciente, cadastrado com sucesso\n";
+	cout << "Nome: " << pacientes[quantidadePacientes].nome << "\n";
+	cout << "Idade: " << pacientes[quantidadePacientes].idade << "\n";
+	cout << "Indentificador: " << pacientes[quantidadePacientes].indentificado << "\n";
