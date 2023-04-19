@@ -1,4 +1,4 @@
-#include <iostream>
+#include <algorithm>
 #include "func.cpp"
 using namespace std;
 
@@ -17,22 +17,27 @@ int main()
     {
     case 1:
       Cadastra(quantidadePacientes);
-
       break;
     case 2:
-
+      Listar(quantidadePacientes, 2);
       break;
     case 3:
-      cout << opcao;
+      Listar(quantidadePacientes, 3);
       break;
     case 4:
-      cout << opcao;
+      Listar(quantidadePacientes, 4);
       break;
     case 5:
-      cout << opcao;
+      Listar(quantidadePacientes, 5);
       break;
     case 6:
-      cout << opcao;
+      Listar(quantidadePacientes, 6);
+      break;
+    case 7:
+      Listar(quantidadePacientes, 7);
+      break;
+    case 8:
+      Listar(quantidadePacientes, 8);
       break;
     default:
       cout << opcao;

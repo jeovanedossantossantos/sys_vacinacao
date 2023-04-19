@@ -5,17 +5,46 @@
 #include <cstring>
 #include <fstream>
 
+#include <algorithm>
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <vector>
+
 using namespace std;
+
 typedef struct
 {
-	char nome[100];
+	char nome[254];
 	int idade;
 	int indentificado;
 } Paciente;
+
+using namespace std;
 
 int menu();
 void Cadastra(int &quantidadePacientes);
 void SalvarDados(int &quantidadePacientes);
 void CarregarDados(int &quantidadePacientes);
 
+int BuscarPeloNome(int &quantidadePacientes);
+
+void Listar(int &quantidadePacientes, int tipo);
+void MergeSort(Paciente pacientes[], int inicio, int fim);
+void Merge(Paciente pacientes[], int inicio, int meio, int fim);
+void QuickSort(Paciente pacientes[], int inicio, int fim);
+int Patition(Paciente pacientes[], int inicio, int fim);
+void QuickSortNome(Paciente pacientes[], int inicio, int fim);
+int PatitionNome(Paciente pacientes[], int inicio, int fim);
+
+void quicksortCrescente(Paciente lista[], int inicio, int fim);
+
+void MergeIndentificador(Paciente v[], int a, int b, int c);
+void MergeSortIndendificado(Paciente v[], int a, int c, int n);
+
+int buscaIndentificador(int &quantidadePacientes);
+
 #endif
+
+

@@ -26,3 +26,6 @@ identificador.
 - O algoritmo de pesquisa deve ser escolhido entre os que já foram vistos em sala de aula.
 - Deverá ser feita a análise de complexidade dos algoritmos utilizados.
 - Equipe com até 5 pessoas.
+
+
+
