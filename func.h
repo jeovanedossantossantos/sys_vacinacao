@@ -43,4 +43,8 @@ void quicksortCrescente(Paciente lista[], int inicio, int fim);
 void MergeIndentificador(Paciente v[], int a, int b, int c);
 void MergeSortIndendificado(Paciente v[], int a, int c, int n);
 
+int buscaIndentificador(int &quantidadePacientes);
+
 #endif
+
+

@@ -32,10 +32,9 @@ int main()
       break;
     case 6:
       Listar(quantidadePacientes, 6);
-
       break;
     case 7:
-      cout << opcao;
+      Listar(quantidadePacientes, 7);
       break;
     case 8:
       Listar(quantidadePacientes, 8);

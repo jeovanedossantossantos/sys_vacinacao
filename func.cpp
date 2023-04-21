@@ -13,10 +13,10 @@ int menu()
 	cout << "       SYSTEMA DE CADASTRO PARA A VACINACAO DO COVID19\n";
 	cout << "================================================================\n";
 	cout << "[1] - CADASTRA UM NOVO PACIENTE\n";
-	cout << "[2] - LISTAR: ORDENAR PELA IDADE DE FORMA CRECENTE\n";
-	cout << "[3] - LISTAR: ORDENAR PELA IDADE DEFORMA DECRECENTE\n";
-	cout << "[4] - LISTAR: ORDENAR PELO INDENTIFICADOR DE FORMA CRECENTE\n";
-	cout << "[5] - LISTAR: ORDENAR PELO INDENTIFICADOR DECRECENTE\n";
+	cout << "[2] - LISTAR: ORDENAR PELA IDADE DE FORMA CRESCENTE\n";
+	cout << "[3] - LISTAR: ORDENAR PELA IDADE DE FORMA DECRESCENTE\n";
+	cout << "[4] - LISTAR: ORDENAR PELO INDENTIFICADOR DE FORMA CRESCENTE\n";
+	cout << "[5] - LISTAR: ORDENAR PELO INDENTIFICADOR DE FORMA DECRESCENTE\n";
 	cout << "[6] - BUSCAR PELO NOME\n";
 	cout << "[7] - BUSCAR POR INDENTIFICADO\n";
 	cout << "[8] - LISTAR: ORDENAR POR ORDEM ALFABETICA\n";
@@ -137,7 +137,7 @@ int BuscarPeloNome(int &quantidadePacientes)
 	QuickSortNome(pacientes, 0, quantidadePacientes - 1);
 
 	int inicio = 0, fim = quantidadePacientes - 1, meio;
-	bool encontrado = false;
+	
 
 	while (inicio <= fim)
 	{
@@ -193,6 +193,20 @@ void Listar(int &quantidadePacientes, int tipo)
 	else if (tipo == 6)
 	{
 		int pos = BuscarPeloNome(quantidadePacientes);
+		if (pos > -1)
+		{
+			cout << "Paciente encontrado:\n";
+			cout << "Nome: ------------- " << pacientes[pos].nome << "\n";
+			cout << "Idade: ------------ " << pacientes[pos].idade << "\n";
+			cout << "Indentificador: --- " << pacientes[pos].indentificado << "\n";
+			return;
+		}
+		cout << "Paciente nao encontrado...\n";
+		return;
+	}
+	else if(tipo==7){
+		
+		int pos = buscaIndentificador(quantidadePacientes);
 		if (pos > -1)
 		{
 			cout << "Paciente encontrado:\n";
@@ -449,4 +463,27 @@ void quicksortCrescente(Paciente lista[], int inicio, int fim)
 		quicksortCrescente(lista, inicio, i);
 		quicksortCrescente(lista, i + 2, fim);
 	}
+}
+int buscaIndentificador(int &quantidadePacientes){
+	int indentificador;
+	cout << "Digite o numero de identificacao do paciente\n";
+	cin >> indentificador;
+	quicksortCrescente(pacientes, 0, quantidadePacientes - 1);
+	int inicio = 0, fim = quantidadePacientes - 1, meio;
+	
+	
+	while(inicio <= fim){
+            meio = (inicio+fim)/2;
+			if (indentificador == pacientes[meio].indentificado){ 
+				return meio;
+			}
+            else if (indentificador < pacientes[meio].indentificado){  
+				fim = meio-1;
+			}
+			else{  
+				inicio = meio+1;
+			}
+		
+	}
+	return -1;
 }
