@@ -15,10 +15,10 @@ int menu()
 	cout << "[1] - CADASTRA UM NOVO PACIENTE\n";
 	cout << "[2] - LISTAR: ORDENAR PELA IDADE DE FORMA CRESCENTE\n";
 	cout << "[3] - LISTAR: ORDENAR PELA IDADE DE FORMA DECRESCENTE\n";
-	cout << "[4] - LISTAR: ORDENAR PELO INDENTIFICADOR DE FORMA CRESCENTE\n";
-	cout << "[5] - LISTAR: ORDENAR PELO INDENTIFICADOR DE FORMA DECRESCENTE\n";
+	cout << "[4] - LISTAR: ORDENAR PELO IDENTIFICADOR DE FORMA CRESCENTE\n";
+	cout << "[5] - LISTAR: ORDENAR PELO IDENTIFICADOR DE FORMA DECRESCENTE\n";
 	cout << "[6] - BUSCAR PELO NOME\n";
-	cout << "[7] - BUSCAR POR INDENTIFICADO\n";
+	cout << "[7] - BUSCAR POR IDENTIFICADOR\n";
 	cout << "[8] - LISTAR: ORDENAR POR ORDEM ALFABETICA\n";
 	cout << "[0] - SAIR DO SYSTEMA\n";
 
@@ -51,17 +51,17 @@ void Cadastra(int &quantidadePacientes)
 		do
 		{
 			cout << "Digite o numero de identificacao do paciente\n";
-			cin >> pacientes[quantidadePacientes].indentificado;
+			cin >> pacientes[quantidadePacientes].identificador;
 
 			if (quantidadePacientes > 0)
 			{
 				unique = 0;
 				for (int i = 0; i < quantidadePacientes; i++)
 				{
-					if (pacientes[quantidadePacientes].indentificado == pacientes[i].indentificado)
+					if (pacientes[quantidadePacientes].identificador == pacientes[i].identificador)
 					{
 						unique = 1;
-						cout << "Indetificador invalido, tente outro\n";
+						cout << "Identificador invalido, tente outro\n";
 						break;
 					}
 				}
@@ -72,7 +72,7 @@ void Cadastra(int &quantidadePacientes)
 		cout << "Paciente, cadastrado com sucesso\n";
 		cout << "Nome: ------------" << pacientes[quantidadePacientes].nome << "\n";
 		cout << "Idade: -----------" << pacientes[quantidadePacientes].idade << "\n";
-		cout << "Indentificador: --" << pacientes[quantidadePacientes].indentificado << "\n";
+		cout << "Identificador: --" << pacientes[quantidadePacientes].identificador << "\n";
 		cout << "================================================================\n";
 
 		SalvarDados(quantidadePacientes);
@@ -178,7 +178,7 @@ void Listar(int &quantidadePacientes, int tipo)
 	else if (tipo == 3)
 	{
 		QuickSort(pacientes, 0, quantidadePacientes - 1);
-		cout << "       Listando por idade de forma Decrecente \n";
+		cout << "       Listando por idade de forma Decrescente \n";
 	}
 	else if (tipo == 4)
 	{
@@ -187,8 +187,8 @@ void Listar(int &quantidadePacientes, int tipo)
 	}
 	else if (tipo == 5)
 	{
-		cout << "       Listando por Indentificador de forma Decrecente \n";
-		MergeSortIndendificado(pacientes, 0, quantidadePacientes - 1, quantidadePacientes);
+		cout << "       Listando por identificador de forma Decrescente \n";
+		MergeSortIdendificador(pacientes, 0, quantidadePacientes - 1, quantidadePacientes);
 	}
 	else if (tipo == 6)
 	{
@@ -198,7 +198,7 @@ void Listar(int &quantidadePacientes, int tipo)
 			cout << "Paciente encontrado:\n";
 			cout << "Nome: ------------- " << pacientes[pos].nome << "\n";
 			cout << "Idade: ------------ " << pacientes[pos].idade << "\n";
-			cout << "Indentificador: --- " << pacientes[pos].indentificado << "\n";
+			cout << "Identificador: --- " << pacientes[pos].identificador << "\n";
 			return;
 		}
 		cout << "Paciente nao encontrado...\n";
@@ -206,13 +206,13 @@ void Listar(int &quantidadePacientes, int tipo)
 	}
 	else if(tipo==7){
 		
-		int pos = buscaIndentificador(quantidadePacientes);
+		int pos = buscaIdentificador(quantidadePacientes);
 		if (pos > -1)
 		{
 			cout << "Paciente encontrado:\n";
 			cout << "Nome: ------------- " << pacientes[pos].nome << "\n";
 			cout << "Idade: ------------ " << pacientes[pos].idade << "\n";
-			cout << "Indentificador: --- " << pacientes[pos].indentificado << "\n";
+			cout << "Identificador: --- " << pacientes[pos].identificador << "\n";
 			return;
 		}
 		cout << "Paciente nao encontrado...\n";
@@ -230,7 +230,7 @@ void Listar(int &quantidadePacientes, int tipo)
 	{
 		cout << "Nome: ------------- " << pacientes[i].nome << "\n";
 		cout << "Idade: ------------ " << pacientes[i].idade << "\n";
-		cout << "Indentificador: --- " << pacientes[i].indentificado << "\n";
+		cout << "Identificador: --- " << pacientes[i].identificador << "\n";
 		cout << "================================================================\n";
 	}
 
@@ -359,43 +359,44 @@ int PatitionNome(Paciente pacientes[], int inicio, int fim)
 	return i;
 }
 
-//A complexibilidade do algoritmo MergeSort O(n log n), n = números de elementos a serem ordenados
-//A complexibilidade de espaço dessa função é O(n), n = tamanhos de subvetores a serem mesclados
-// Função para fazer a fusão de duas sub-arrays ordenadas em um único array
-void MergeIndentificador(Paciente v[], int a, int b, int c)
+
+//A complexibilidade do algoritmo MergeSort O(n log n), n = nÃºmeros de elementos a serem ordenados
+//A complexibilidade de espaÃ§o dessa funÃ§Ã£o Ã© O(n), n = tamanhos de subvetores a serem mesclados
+// FunÃ§Ã£o para fazer a fusÃ£o de duas sub-arrays ordenadas em um Ãºnico array
+void MergeIdentificador(Paciente v[], int a, int b, int c)
 {
 	int x, y, z;
 	int num_1 = b - a + 1;
 	int num_2 = c - b;
 
-	// Criação de arrays temporários A e R
+	// CriaÃ§Ã£o de arrays temporÃ¡rios A e R
 	Paciente A[num_1], R[num_2];
 
-	// Copia os elementos das duas sub-arrays para os arrays temporários A e R
+	// Copia os elementos das duas sub-arrays para os arrays temporÃ¡rios A e R
 	for (x = 0; x < num_1; x++)
 		A[x] = v[a + x];
 	for (y = 0; y < num_2; y++)
 		R[y] = v[b + 1 + y];
 
-	// Inicialização dos índices x, y e z para fazer a fusão
-	x = 0; // Índice para a sub-array A
-	y = 0; // Índice para a sub-array R
-	z = a; // Índice para o array original z
+	// InicializaÃ§Ã£o dos Ã­ndices x, y e z para fazer a fusÃ£o
+	x = 0; // Ãndice para a sub-array A
+	y = 0; // Ãndice para a sub-array R
+	z = a; // Ãndice para o array original z
 
-	// Faz a fusão das duas sub-arrays em um único array em ordem decrescente
+	// Faz a fusÃ£o das duas sub-arrays em um Ãºnico array em ordem decrescente
 	while (x < num_1 && y < num_2)
 	{
-		if (A[x].indentificado >= R[y].indentificado)
+		if (A[x].identificador >= R[y].identificador)
 		{				 // Compara o elemento da sub-array A com o elemento da sub-array R
-			v[z] = A[x]; // O elemento da sub-array A é maior ou igual ao elemento da sub-array R
-			x++;		 // Incrementa o índice da sub-array A
+			v[z] = A[x]; // O elemento da sub-array A Ã© maior ou igual ao elemento da sub-array R
+			x++;		 // Incrementa o Ã­ndice da sub-array A
 		}
 		else
 		{
-			v[z] = R[y]; // O elemento da sub-array R é maior do que o elemento da sub-array A
-			y++;		 // Incrementa o índice da sub-array R
+			v[z] = R[y]; // O elemento da sub-array R Ã© maior do que o elemento da sub-array A
+			y++;		 // Incrementa o Ã­ndice da sub-array R
 		}
-		z++; // Incrementa o índice do array original arr
+		z++; // Incrementa o Ã­ndice do array original arr
 	}
 
 	// Copia os elementos restantes da sub-array A, se houver
@@ -415,37 +416,37 @@ void MergeIndentificador(Paciente v[], int a, int b, int c)
 	}
 }
 
-// Função para dividir o array em sub-arrays menores e chamar a função merge para fazer a fusão
-void MergeSortIndendificado(Paciente v[], int a, int c, int n)
+// FunÃ§Ã£o para dividir o array em sub-arrays menores e chamar a funÃ§Ã£o merge para fazer a fusÃ£o
+void MergeSortIdendificador(Paciente v[], int a, int c, int n)
 {
 	if (a < c)
 	{
 		int b = a + (c - a) / 2;
 
-		// Chama a função merge_sort para a sub-array esquerda
-		MergeSortIndendificado(v, a, b, n);
+		// Chama a funÃ§Ã£o merge_sort para a sub-array esquerda
+		MergeSortIdendificador(v, a, b, n);
 
-		// Chama a função merge_sort para a sub-array direita
-		MergeSortIndendificado(v, b + 1, c, n);
+		// Chama a funÃ§Ã£o merge_sort para a sub-array direita
+		MergeSortIdendificador(v, b + 1, c, n);
 
-		// Faz a fusão das sub-arrays esquerda e direita
-		MergeIndentificador(v, a, b, c);
+		// Faz a fusÃ£o das sub-arrays esquerda e direita
+		MergeIdentificador(v, a, b, c);
 	}
 }
 
 void quicksortCrescente(Paciente lista[], int inicio, int fim)
 {
-	// A complexidade de ordenação quicksort é O(n log n) no caso médio e O(n^2) no pior caso.
+	// A complexidade de ordenaÃ§Ã£o quicksort Ã© O(n log n) no caso mÃ©dio e O(n^2) no pior caso.
 	if (inicio < fim)
 	{
-		// Escolhendo o último elemento como pivô
-		int pivo = lista[fim].indentificado;
+		// Escolhendo o Ãºltimo elemento como pivÃ´
+		int pivo = lista[fim].identificador;
 		int i = inicio - 1;
 
 		// Particionando a lista em sub-listas menores
 		for (int j = inicio; j < fim; j++)
 		{
-			if (lista[j].indentificado <= pivo)
+			if (lista[j].identificador <= pivo)
 			{
 				i++;
 				Paciente temp = lista[i];
@@ -454,30 +455,30 @@ void quicksortCrescente(Paciente lista[], int inicio, int fim)
 			}
 		}
 
-		// Colocando o pivô em sua posição final
+		// Colocando o pivÃ´ em sua posiÃ§Ã£o final
 		Paciente temp = lista[i + 1];
 		lista[i + 1] = lista[fim];
 		lista[fim] = temp;
 
-		// Chamando a função quicksort recursivamente para ordenar as sub-listas
+		// Chamando a funÃ§Ã£o quicksort recursivamente para ordenar as sub-listas
 		quicksortCrescente(lista, inicio, i);
 		quicksortCrescente(lista, i + 2, fim);
 	}
 }
-int buscaIndentificador(int &quantidadePacientes){
-	int indentificador;
+int buscaIdentificador(int &quantidadePacientes){
+	int identificador;
 	cout << "Digite o numero de identificacao do paciente\n";
-	cin >> indentificador;
+	cin >> identificador;
 	quicksortCrescente(pacientes, 0, quantidadePacientes - 1);
 	int inicio = 0, fim = quantidadePacientes - 1, meio;
 	
 	
 	while(inicio <= fim){
             meio = (inicio+fim)/2;
-			if (indentificador == pacientes[meio].indentificado){ 
+			if (identificador == pacientes[meio].identificador){ 
 				return meio;
 			}
-            else if (indentificador < pacientes[meio].indentificado){  
+            else if (identificador < pacientes[meio].identificador){  
 				fim = meio-1;
 			}
 			else{  

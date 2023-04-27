@@ -18,7 +18,7 @@ typedef struct
 {
 	char nome[254];
 	int idade;
-	int indentificado;
+	int identificador;
 } Paciente;
 
 using namespace std;
@@ -40,11 +40,10 @@ int PatitionNome(Paciente pacientes[], int inicio, int fim);
 
 void quicksortCrescente(Paciente lista[], int inicio, int fim);
 
-void MergeIndentificador(Paciente v[], int a, int b, int c);
-void MergeSortIndendificado(Paciente v[], int a, int c, int n);
+void MergeIdentificador(Paciente v[], int a, int b, int c);
+void MergeSortIdendificador(Paciente v[], int a, int c, int n);
 
-int buscaIndentificador(int &quantidadePacientes);
+int buscaIdentificador(int &quantidadePacientes);
 
 #endif
-
 
