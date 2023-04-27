@@ -360,43 +360,41 @@ int PatitionNome(Paciente pacientes[], int inicio, int fim)
 }
 
 
-//A complexibilidade do algoritmo MergeSort O(n log n), n = nÃºmeros de elementos a serem ordenados
-//A complexibilidade de espaÃ§o dessa funÃ§Ã£o Ã© O(n), n = tamanhos de subvetores a serem mesclados
-// FunÃ§Ã£o para fazer a fusÃ£o de duas sub-arrays ordenadas em um Ãºnico array
-void MergeIdentificador(Paciente v[], int a, int b, int c)
+// Funcao para fazer a fusao de duas sub-arrays ordenadas em um unico array
+void MergeIdentificador(Paciente v[], int inicio, int meio, int fim)
 {
 	int x, y, z;
-	int num_1 = b - a + 1;
-	int num_2 = c - b;
+	int num_1 = meio - inicio + 1;
+	int num_2 = fim - meio;
 
-	// CriaÃ§Ã£o de arrays temporÃ¡rios A e R
+	// Criacao de arrays temporarios A e R
 	Paciente A[num_1], R[num_2];
 
-	// Copia os elementos das duas sub-arrays para os arrays temporÃ¡rios A e R
+	// Copia os elementos das duas sub-arrays para os arrays temporarios A e R
 	for (x = 0; x < num_1; x++)
-		A[x] = v[a + x];
+		A[x] = v[inicio + x];
 	for (y = 0; y < num_2; y++)
-		R[y] = v[b + 1 + y];
+		R[y] = v[meio + 1 + y];
 
-	// InicializaÃ§Ã£o dos Ã­ndices x, y e z para fazer a fusÃ£o
-	x = 0; // Ãndice para a sub-array A
-	y = 0; // Ãndice para a sub-array R
-	z = a; // Ãndice para o array original z
+	// Inicializacao dos indices x, y e z para fazer a fusao
+	x = 0; // indice para a sub-array A
+	y = 0; // indice para a sub-array R
+	z = inicio; // indice para o array original z
 
-	// Faz a fusÃ£o das duas sub-arrays em um Ãºnico array em ordem decrescente
+	// Faz a fusao das duas sub-arrays em um unico array em ordem decrescente
 	while (x < num_1 && y < num_2)
 	{
 		if (A[x].identificador >= R[y].identificador)
 		{				 // Compara o elemento da sub-array A com o elemento da sub-array R
-			v[z] = A[x]; // O elemento da sub-array A Ã© maior ou igual ao elemento da sub-array R
-			x++;		 // Incrementa o Ã­ndice da sub-array A
+			v[z] = A[x]; 
+			x++;		
 		}
 		else
 		{
-			v[z] = R[y]; // O elemento da sub-array R Ã© maior do que o elemento da sub-array A
-			y++;		 // Incrementa o Ã­ndice da sub-array R
+			v[z] = R[y]; 
+			y++;		 
 		}
-		z++; // Incrementa o Ã­ndice do array original arr
+		z++; 
 	}
 
 	// Copia os elementos restantes da sub-array A, se houver
@@ -416,21 +414,21 @@ void MergeIdentificador(Paciente v[], int a, int b, int c)
 	}
 }
 
-// FunÃ§Ã£o para dividir o array em sub-arrays menores e chamar a funÃ§Ã£o merge para fazer a fusÃ£o
-void MergeSortIdendificador(Paciente v[], int a, int c, int n)
+// Funcao para dividir o array em sub-arrays menores e chamar a funcao merge para fazer a fusao
+void MergeSortIdendificador(Paciente v[], int inicio, int fim, int tam)
 {
-	if (a < c)
+	if (inicio < fim)
 	{
-		int b = a + (c - a) / 2;
+		int b = inicio + (fim - inicio) / 2;
 
-		// Chama a funÃ§Ã£o merge_sort para a sub-array esquerda
-		MergeSortIdendificador(v, a, b, n);
+		// Chama a funcao merge_sort para a sub-array esquerda
+		MergeSortIdendificador(v, inicio, b, tam);
 
-		// Chama a funÃ§Ã£o merge_sort para a sub-array direita
-		MergeSortIdendificador(v, b + 1, c, n);
+		// Chama a funcao merge_sort para a sub-array direita
+		MergeSortIdendificador(v, b + 1, fim, tam);
 
-		// Faz a fusÃ£o das sub-arrays esquerda e direita
-		MergeIdentificador(v, a, b, c);
+		// Faz a fusao das sub-arrays esquerda e direita
+		MergeIdentificador(v, inicio, b, fim);
 	}
 }
 
